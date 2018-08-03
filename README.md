@@ -1,4 +1,6 @@
-# Visualizing Pond Depth Using The Things Network and InfluxDB
+# Storm Water IoT
+
+### Visualizing Pond Depth Using The Things Network and InfluxDB
 
 For this project, I programmed a Featherboard microcontroller to read analog ultrasonic data to determine the depth of a pond in Norfolk, Virginia. The idea was to get an understanding of how a rainfall event would affect the pond and the degree to which pumping flood water from the street into the pond would alleviate the burden on Norfolk's stormwater management system. 
 
@@ -8,7 +10,7 @@ If you come across this for a similar project, feel free to use anything I've po
 - [Adafruit Feather 32u4 LoRa RFM9x](https://www.adafruit.com/product/3078)
 - [MaxBotix MB7092](https://www.maxbotix.com/Ultrasonic_Sensors/MB7092.htm)
 - [The Things Gateway](http://www.newark.com/the-things-network/ttn-gw-915/accessory-type-wireless-gateway/dp/05AC1807)
-
+----
 #### Helpful Tutorials
 - [Running the TICK Stack on Windows](https://www.influxdata.com/blog/running-the-tick-stack-on-windows/) - if you're running Windows, this guide will be crucial to getting InfluxDB and its components running correctly on your machine.
 - [Tutorial: Build an open source smart city with LoRaWAN](https://medium.com/kkbankol-events/tutorial-build-a-open-source-smart-city-based-on-lora-7ca76b9a098) - this tutorial gives a beginning to end guide on creating your own gateway, as opposed to buying one, correct wiring diagrams for the featherboard I used, and coding examples and flows. 
