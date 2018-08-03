@@ -4,7 +4,7 @@
 
 For this project, I programmed a featherboard microcontroller using the Arduino IDE to read analog ultrasonic data from a MaxBotix MB7092 sensor. In addition, the project relies on an internet of things approach using long distance radio communication with LoRaWAN and The Things Network and data storage and visualization with InfluxDB. The application was for a pond in Norfolk, Virginia to get an understanding of how a rainfall event would affect the pond over time. Ideally, using the pond as a means of stormwater retention would alleviate the burden on Norfolk's stormwater management system. 
 
-! [](images\flowchart.jpg)
+![flowchart](flowchart.JPG)
 
 #### Hardware Used
 - [Adafruit Feather 32u4 LoRa RFM9x](https://www.adafruit.com/product/3078)
