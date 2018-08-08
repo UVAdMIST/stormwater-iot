@@ -3,32 +3,34 @@
 Visualizing Pond Depth Using The Things Network and InfluxDB
 ----
 
-For this project, I programmed a featherboard microcontroller using the Arduino IDE to read analog ultrasonic data from a MaxBotix MB7092 sensor. In addition, the project relies on an internet of things approach using long distance radio communication with LoRaWAN and The Things Network and data storage and visualization with InfluxDB. The application was for a pond in Norfolk, Virginia to get an understanding of how a rainfall event would affect the pond over time. Ideally, using the pond as a means of stormwater retention would alleviate the burden on Norfolk's stormwater management system. 
+*In this README, I'll briefly explain my project outline and reasoning but I have created an in depth Wiki for this repo where I direct every step I took.*
+
+For this project, I programmed a featherboard microcontroller using the Arduino IDE to read analog ultrasonic data from a MaxBotix MB7092 sensor. In addition, the project relies on an internet of things approach using long distance radio communication with LoRaWAN and The Things Network, and data storage and visualization with InfluxDB. The application was for a pond in Norfolk, Virginia to get an understanding of how a rainfall event would affect the pond over time. Ideally, using the pond as a means of stormwater retention would alleviate the burden on Norfolk's stormwater management system. 
 
 ![alt-tag](https://github.com/sta7bw/stormwater-iot/blob/master/images/flowchart.JPG)
 
 Hardware Used
 ----
-- [Adafruit Feather 32u4 LoRa RFM9x](https://www.adafruit.com/product/3078)
-- [MaxBotix MB7092](https://www.maxbotix.com/Ultrasonic_Sensors/MB7092.htm) 
-- [The Things Gateway](http://www.newark.com/the-things-network/ttn-gw-915/accessory-type-wireless-gateway/dp/05AC1807)
+- [Adafruit Feather 32u4 LoRa RFM9x](https://www.adafruit.com/product/3078) - microcontroller with long range packet radio transceiver 
+- [MaxBotix MB7092](https://www.maxbotix.com/Ultrasonic_Sensors/MB7092.htm) - outdoor ultrasonic sensor
+- [The Things Gateway](http://www.newark.com/the-things-network/ttn-gw-915/accessory-type-wireless-gateway/dp/05AC1807) - wireless gateway that collects radio transmissions from microcontroller and sends them to the internet
 
 Software Used
 ----
-- [Arduino IDE](https://www.arduino.cc/en/Main/Software)
+- [Arduino IDE](https://www.arduino.cc/en/Main/Software) - open source electronics platform that allows coding, compiling, and debugging in C++ 
 - [Node-Red](https://nodered.org/) - a flow based programming platform that easily lets the user connect different sources of information
-- [InfluxDB](https://portal.influxdata.com/downloads)
-- [LMIC Library](https://github.com/matthijskooijman/arduino-lmic)
+- [InfluxDB](https://portal.influxdata.com/downloads) - time series database for storage and visualization
+- [LMIC Library](https://github.com/matthijskooijman/arduino-lmic) - LoRaMAC in C library used to allow my micro controller talk with TTN
 
 Project Details
 ----
-The Things Network (TTN) in the United States operates at the 915 MHz band for low-bandwidth, long distance radio communication. Because it is open, free to use, and low-bandwidth, messages sent to TTN are expected to be small in size (in the order of bytes). Best practice is to limit bandwidth to 400 bytes/hour. 
+The Things Network (TTN) in the United States operates at 915 MHz for low-bandwidth, long distance radio communication. Because it is open, free to use, and low-bandwidth, messages sent to TTN are expected to be small in size (in the order of bytes). Best practice is to limit data to 400 bytes/hour. 
 
 The LoRa chip on the Featherboard is designed to send small packets of data at intervals so it works well for this project but because TTN uses [LoRaWAN](https://www.lora-alliance.org/about-lorawan), the LoRaWAN stack had to be placed onto the chip. I used the [LMIC Library](https://github.com/matthijskooijman/arduino-lmic) which enabled me to initally send the string, "Hello, World!" to TTN using the example ttn_abp. 
 
 I compiled code that read the ultrasonic data from the sensor and printed the value to the serial monitor. I used the code developed there to replace the string "Hello, World!" in the LMIC example and instead send the ultrasonic data encoded as 2 bytes in hexadecimal format. In order to decode the hexadecimal to decimal format, I used a payload format in TTN console that reversed the code. 
 
-From there, I created a [node flow](https://github.com/sta7bw/stormwater-iot/blob/master/images/node_flow.JPG) using node-red that grabs the data from TTN and sends it to InfluxDB. Then, following the tutorial listed below, I was able to visualize that data using Chronograf, software owned by InfluxDB. 
+From there, I created a [node flow](https://github.com/sta7bw/stormwater-iot/blob/master/images/node_flow.JPG) using node-red that grabs the data from TTN and sends it to InfluxDB where it is stored and visualized using Chronograf.
 
 Helpful Tutorials
 ----
